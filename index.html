@@ -3,62 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- SEO Meta Tags -->
-<title>Porovnanie hypoték bánk SK 2026 | Úrokové sadzby a RPMN</title>
-<meta name="description" content="Aktuálne úrokové sadzby a RPMN hypoték všetkých slovenských bánk. Denne aktualizované porovnanie: Fio, ČSOB, VÚB, SLSP, mBank, Tatra banka, 365.bank a ďalšie. Nájdite najlepšiu hypotéku.">
-<meta name="keywords" content="hypotéka, úrokové sadzby, RPMN, porovnanie hypoték, Fio banka, ČSOB, VÚB, SLSP, mBank, Tatra banka, 365.bank, hypotéka 2026, najlepšia hypotéka">
-<meta name="author" content="Banky SK">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Porovnanie hypoték bánk SK 2026 | Úrokové sadzby a RPMN">
-<meta property="og:description" content="Aktuálne úrokové sadzby a RPMN hypoték všetkých slovenských bánk. Denne aktualizované porovnanie.">
-<meta property="og:url" content="https://bankypoint1.clarik6.workers.dev">
-<meta property="og:locale" content="sk_SK">
-<meta property="og:site_name" content="Porovnanie hypoték SK">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Porovnanie hypoték bánk SK 2026">
-<meta name="twitter:description" content="Aktuálne úrokové sadzby a RPMN hypoték všetkých slovenských bánk.">
-
-<!-- Canonical URL -->
-<link rel="canonical" href="https://bankypoint1.clarik6.workers.dev">
-
-<!-- Google Analytics 4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-151CX0X301"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-151CX0X301');
-</script>
-
-<!-- Schema.org structured data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Porovnanie hypoték bánk SK",
-  "description": "Aktuálne úrokové sadzby a RPMN hypoték všetkých slovenských bánk",
-  "url": "https://bankypoint1.clarik6.workers.dev",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Web",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "ratingCount": "1"
-  }
-}
-</script>
-
+<title>Porovnanie hypoték bánk SK</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
 :root {
@@ -361,30 +306,6 @@ tr td { transition: all 0.2s; }
 .result-detail-item .lbl { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; display: block; }
 .pass { color: #22c55e; }
 .fail { color: #ef4444; }
-
-/* Affiliate tlačidlá */
-.affiliate-btn {
-    display: inline-block;
-    padding: 0.4rem 1rem;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-decoration: none;
-    color: white;
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    transition: all 0.2s;
-    white-space: nowrap;
-}
-.affiliate-btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-    color: white;
-}
-.affiliate-btn:active {
-    transform: translateY(0);
-}
 </style>
 
 <script>
@@ -535,7 +456,22 @@ function fillFromBest() {
     if (best) inp.value = best.toFixed(2);
     else inp.value = '3.60';
 }
-</div><!-- end info panel -->
+</script>
+
+<!-- Filtre -->
+<div class="card">
+    <h2>📊 Porovnanie úrokových sadzieb podľa fixácie</h2>
+    <div class="filters" id="fixFilters">
+        <button class="filter-btn active" data-fix="3">3-ročná fixácia</button>
+        <button class="filter-btn" data-fix="5">5-ročná fixácia</button>
+        <button class="filter-btn" data-fix="1">1-ročná fixácia</button>
+        <button class="filter-btn" data-fix="10">10-ročná fixácia</button>
+        <button class="filter-btn" data-fix="all">Všetky fixácie</button>
+    </div>
+    <div class="chart-container">
+        <canvas id="rateChart"></canvas>
+    </div>
+</div>
 
 <!-- Tabuľka so sortovaním -->
 <div class="card" id="tableCard">
@@ -570,74 +506,12 @@ function fillFromBest() {
                     <th>10R</th>
                     <th class="rpmn-header">RPMN ⭐</th>
                     <th>Zmena</th>
-                    <th>Požiadať</th>
                 </tr>
             </thead>
             <tbody id="rateTableBody">
-                <tr><td colspan="9" style="text-align:center;color:var(--muted);padding:2rem;">Načítavam dáta...</td></tr>
+                <tr><td colspan="8" style="text-align:center;color:var(--muted);padding:2rem;">Načítavam dáta...</td></tr>
             </tbody>
         </table>
-    </div>
-</div>
-
-<!-- Kalkulačka schválenia úveru -->
-<div class="card calculator-card">
-    <h2>🧮 Koľko hypotéky môžem dostať?</h2>
-    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1rem;">
-        Výpočet podľa NBS opatrení — DTI max 8× ročný príjem, DSTI max 50%, splatnosť do 70r
-    </p>
-    <div class="calc-grid">
-        <div class="calc-field">
-            <label>Vek</label>
-            <div class="input-group">
-                <input type="number" id="calcAge" value="30" min="18" max="70">
-                <span class="input-suffix">rokov</span>
-            </div>
-        </div>
-        <div class="calc-field">
-            <label>Čistý mesačný príjem</label>
-            <div class="input-group">
-                <input type="number" id="calcIncome" value="1500" min="0" step="100">
-                <span class="input-suffix">€</span>
-            </div>
-        </div>
-        <div class="calc-field">
-            <label>Úroková sadzba</label>
-            <div class="input-group">
-                <input type="number" id="calcRate" value="3.60" min="0" step="0.1">
-                <span class="input-suffix">%</span>
-            </div>
-        </div>
-        <div class="calc-field">
-            <label>Doba splácania</label>
-            <div class="input-group">
-                <input type="number" id="calcTerm" value="30" min="1" max="30">
-                <span class="input-suffix">rokov</span>
-            </div>
-        </div>
-    </div>
-    <div class="calc-hint" id="calcTermHint" style="display:none;"></div>
-    <div class="calc-btn-row">
-        <button class="calc-btn" onclick="runCalc()">Vypočítať</button>
-        <button class="calc-btn calc-btn-secondary" onclick="fillFromBest()">Použiť aktuálne sadzby</button>
-    </div>
-    <div class="calc-results" id="calcResults" style="display:none;">
-        <div class="result-card result-yes" id="calcResultYes" style="display:none;">
-            <div class="result-icon">✅</div>
-            <div class="result-text">
-                <strong>Hypotéku môžete dostať</strong>
-                <div class="result-sum">až do výšky <span id="calcMaxLoan" class="result-value"></span></div>
-                <div class="result-detail" id="calcDetailMax"></div>
-            </div>
-        </div>
-        <div class="result-card result-no" id="calcResultNo" style="display:none;">
-            <div class="result-icon">❌</div>
-            <div class="result-text">
-                <strong>Hypotéku neschvália</strong>
-                <div class="result-detail" id="calcDetailNo"></div>
-            </div>
-        </div>
-        <div class="result-details-grid" id="calcDetailsGrid"></div>
     </div>
 </div>
 
@@ -649,21 +523,6 @@ function fillFromBest() {
     </p>
     <div class="chart-container">
         <canvas id="rpmnChart"></canvas>
-    </div>
-</div>
-
-<!-- Filtre -->
-<div class="card">
-    <h2>📊 Porovnanie úrokových sadzieb podľa fixácie</h2>
-    <div class="filters" id="fixFilters">
-        <button class="filter-btn active" data-fix="3">3-ročná fixácia</button>
-        <button class="filter-btn" data-fix="5">5-ročná fixácia</button>
-        <button class="filter-btn" data-fix="1">1-ročná fixácia</button>
-        <button class="filter-btn" data-fix="10">10-ročná fixácia</button>
-        <button class="filter-btn" data-fix="all">Všetky fixácie</button>
-    </div>
-    <div class="chart-container">
-        <canvas id="rateChart"></canvas>
     </div>
 </div>
 
@@ -691,7 +550,7 @@ function fillFromBest() {
     </p>
 </div>
 
-</div><!-- end container -->
+</div>
 
 <footer class="footer">
     <p>Porovnanie hypoték bánk SK — <strong>RPMN</strong> je skutočný ukazovateľ ceny hypotéky</p>
@@ -837,22 +696,6 @@ function getRankClass(index) {
     return 'rank-other';
 }
 
-// ============== AFFILIATE URLS ==============
-// Placeholder — neskôr nahraď skutočnými affiliate linkmi
-const AFFILIATE_URLS = {
-    'Fio banka': 'https://www.fio.sk/hypoteka',
-    'ČSOB': 'https://www.csob.sk/hypotekarny-uver',
-    'VÚB': 'https://www.vub.sk/ludia/hypoteky.html',
-    'SLSP': 'https://www.slsp.sk/sk/ludia/uvery/uver-na-byvanie',
-    'mBank': 'https://www.mbank.sk/individualni/hypoteky/sadzobnik',
-    'Tatra banka': 'https://www.tatrabanka.sk/hypoteka/',
-    '365.bank': 'https://365.bank/hypoteka',
-    'UniCredit': 'https://www.unicreditbank.sk/sk/ludia/uvery/hypoteka.html',
-    'Prima banka': 'https://www.primabanka.sk/hypoteka',
-    'BKS Bank': 'https://www.bksbank.sk/osobne-financie/hypoteky',
-    'Poštová banka': 'https://www.postovabanka.sk/hypoteka',
-};
-
 // ============== MAIN ==============
 
 let rateChart = null;
@@ -970,12 +813,6 @@ function renderTable(data) {
         }
         tr.innerHTML += `<td class="${rpmnCls}">${info.rpmn ? info.rpmn.toFixed(2) + '%' : '-'}</td>`;
         tr.innerHTML += `<td class="stable">—</td>`;
-
-        // Affiliate tlačidlo
-        const affUrl = AFFILIATE_URLS[banka] || info.url || '#';
-        const affBtn = `<a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="affiliate-btn" onclick="gtag('event', 'click', {'event_category': 'affiliate', 'event_label': '${banka}'});">Požiadať →</a>`;
-        tr.innerHTML += `<td>${affBtn}</td>`;
-
         tbody.appendChild(tr);
     }
 }
