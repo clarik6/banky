@@ -144,7 +144,12 @@ tr td { transition: all 0.2s; }
 /* Info panel */
 .info-grid {
     display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1rem; margin-bottom: 1.5rem;
+    gap: 1rem; margin-bottom: 0;
+}
+.info-card {
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;
 }
 .info-item {
     background: var(--glass-bg); border: 1px solid var(--glass-border);
@@ -174,6 +179,7 @@ tr td { transition: all 0.2s; }
 <div class="container">
 
 <!-- Info panel -->
+<div class="info-card">
 <div class="info-grid" id="infoPanel">
     <div class="info-item">
         <div class="value" id="bankCount">-</div>
@@ -189,6 +195,10 @@ tr td { transition: all 0.2s; }
     </div>
     <div class="info-item">
         <div class="value gold" id="avgRpmn">-</div>
+        <div class="label">Priemerné RPMN</div>
+    </div>
+</div>
+</div>
 
 <!-- Tabuľka so sortovaním -->
 <div class="card" id="tableCard">
