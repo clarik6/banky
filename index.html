@@ -361,6 +361,30 @@ tr td { transition: all 0.2s; }
 .result-detail-item .lbl { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; display: block; }
 .pass { color: #22c55e; }
 .fail { color: #ef4444; }
+
+/* Affiliate tlačidlá */
+.affiliate-btn {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.affiliate-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    color: white;
+}
+.affiliate-btn:active {
+    transform: translateY(0);
+}
 </style>
 
 <script>
@@ -561,6 +585,7 @@ function fillFromBest() {
                     <th>10R</th>
                     <th class="rpmn-header">RPMN ⭐</th>
                     <th>Zmena</th>
+                    <th>Požiadať</th>
                 </tr>
             </thead>
             <tbody id="rateTableBody">
@@ -751,6 +776,22 @@ function getRankClass(index) {
     return 'rank-other';
 }
 
+// ============== AFFILIATE URLS ==============
+// Placeholder — neskôr nahraď skutočnými affiliate linkmi
+const AFFILIATE_URLS = {
+    'Fio banka': 'https://www.fio.sk/hypoteka',
+    'ČSOB': 'https://www.csob.sk/hypotekarny-uver',
+    'VÚB': 'https://www.vub.sk/ludia/hypoteky.html',
+    'SLSP': 'https://www.slsp.sk/sk/ludia/uvery/uver-na-byvanie',
+    'mBank': 'https://www.mbank.sk/individualni/hypoteky/sadzobnik',
+    'Tatra banka': 'https://www.tatrabanka.sk/hypoteka/',
+    '365.bank': 'https://365.bank/hypoteka',
+    'UniCredit': 'https://www.unicreditbank.sk/sk/ludia/uvery/hypoteka.html',
+    'Prima banka': 'https://www.primabanka.sk/hypoteka',
+    'BKS Bank': 'https://www.bksbank.sk/osobne-financie/hypoteky',
+    'Poštová banka': 'https://www.postovabanka.sk/hypoteka',
+};
+
 // ============== MAIN ==============
 
 let rateChart = null;
@@ -868,6 +909,12 @@ function renderTable(data) {
         }
         tr.innerHTML += `<td class="${rpmnCls}">${info.rpmn ? info.rpmn.toFixed(2) + '%' : '-'}</td>`;
         tr.innerHTML += `<td class="stable">—</td>`;
+
+        // Affiliate tlačidlo
+        const affUrl = AFFILIATE_URLS[banka] || info.url || '#';
+        const affBtn = `<a href="${affUrl}" target="_blank" rel="noopener noreferrer" class="affiliate-btn" onclick="gtag('event', 'click', {'event_category': 'affiliate', 'event_label': '${banka}'});">Požiadať →</a>`;
+        tr.innerHTML += `<td>${affBtn}</td>`;
+
         tbody.appendChild(tr);
     }
 }
