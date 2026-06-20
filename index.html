@@ -177,6 +177,61 @@ tr td { transition: all 0.2s; }
 <div class="info-grid" id="infoPanel">
     <div class="info-item">
         <div class="value" id="bankCount">-</div>
+
+<!-- Tabuľka so sortovaním -->
+<div class="card" id="tableCard">
+    <h2>🏆 Porovnanie podľa RPMN — skutočná cena hypotéky</h2>
+    <div class="sort-bar">
+        <span class="sort-label">Zoradiť podľa:</span>
+        <button class="sort-btn" data-sort="rpmn" onclick="setSort('rpmn')">
+            RPMN <span class="sort-arrow">▼</span>
+        </button>
+        <button class="sort-btn" data-sort="rate5" onclick="setSort('rate5')">
+            5R sadzba <span class="sort-arrow">▼</span>
+        </button>
+        <button class="sort-btn" data-sort="rate3" onclick="setSort('rate3')">
+            3R sadzba <span class="sort-arrow">▼</span>
+        </button>
+        <button class="sort-btn" data-sort="name" onclick="setSort('name')">
+            Názov banky <span class="sort-arrow">▲</span>
+        </button>
+    </div>
+    <p style="color:var(--rpmn-accent);font-size:0.8rem;margin-bottom:0.75rem;">
+        ⭐ RPMN = celková cena úveru (úrok + poplatky). <strong>Čím nižšie, tým lepšia hypotéka.</strong>
+    </p>
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Banka</th>
+                    <th>1R</th>
+                    <th>3R</th>
+                    <th>5R</th>
+                    <th>10R</th>
+                    <th class="rpmn-header">RPMN ⭐</th>
+                    <th>Zmena</th>
+                </tr>
+            </thead>
+            <tbody id="rateTableBody">
+                <tr><td colspan="8" style="text-align:center;color:var(--muted);padding:2rem;">Načítavam dáta...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- RPMN Graf -->
+<div class="card">
+    <h2>⭐ RPMN — Skutočná cena hypotéky (najdôležitejší údaj)</h2>
+    <p style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;">
+        RPMN zahŕňa úrok + všetky poplatky. Nižšie RPMN = lacnejšia hypotéka.
+    </p>
+    <div class="chart-container">
+        <canvas id="rpmnChart"></canvas>
+    </div>
+</div>
+
+
         <div class="label">Sledovaných bánk</div>
     </div>
     <div class="info-item">
@@ -473,58 +528,9 @@ function fillFromBest() {
     </div>
 </div>
 
-<!-- Tabuľka so sortovaním -->
-<div class="card" id="tableCard">
-    <h2>🏆 Porovnanie podľa RPMN — skutočná cena hypotéky</h2>
-    <div class="sort-bar">
-        <span class="sort-label">Zoradiť podľa:</span>
-        <button class="sort-btn" data-sort="rpmn" onclick="setSort('rpmn')">
-            RPMN <span class="sort-arrow">▼</span>
-        </button>
-        <button class="sort-btn" data-sort="rate5" onclick="setSort('rate5')">
-            5R sadzba <span class="sort-arrow">▼</span>
-        </button>
-        <button class="sort-btn" data-sort="rate3" onclick="setSort('rate3')">
-            3R sadzba <span class="sort-arrow">▼</span>
-        </button>
-        <button class="sort-btn" data-sort="name" onclick="setSort('name')">
-            Názov banky <span class="sort-arrow">▲</span>
-        </button>
-    </div>
-    <p style="color:var(--rpmn-accent);font-size:0.8rem;margin-bottom:0.75rem;">
-        ⭐ RPMN = celková cena úveru (úrok + poplatky). <strong>Čím nižšie, tým lepšia hypotéka.</strong>
-    </p>
-    <div style="overflow-x: auto;">
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Banka</th>
-                    <th>1R</th>
-                    <th>3R</th>
-                    <th>5R</th>
-                    <th>10R</th>
-                    <th class="rpmn-header">RPMN ⭐</th>
-                    <th>Zmena</th>
-                </tr>
-            </thead>
-            <tbody id="rateTableBody">
-                <tr><td colspan="8" style="text-align:center;color:var(--muted);padding:2rem;">Načítavam dáta...</td></tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 
-<!-- RPMN Graf -->
-<div class="card">
-    <h2>⭐ RPMN — Skutočná cena hypotéky (najdôležitejší údaj)</h2>
-    <p style="color:var(--muted);font-size:0.8rem;margin-bottom:0.5rem;">
-        RPMN zahŕňa úrok + všetky poplatky. Nižšie RPMN = lacnejšia hypotéka.
-    </p>
-    <div class="chart-container">
-        <canvas id="rpmnChart"></canvas>
-    </div>
-</div>
+
+
 
 <!-- Vývoj úrokových sadzieb -->
 <div class="card">
